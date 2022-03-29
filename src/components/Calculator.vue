@@ -36,19 +36,19 @@
 </script>
 
 <template>
-  <div class="container px-3">
+  <div class="container px-3 p-3">
       <div class="form-group">
         <label id="formHeadings">Salary Calculator</label>
         <br/>
-        <input type="text" class="form-control" id="" aria-describedby="salary" v-model="salary" placeholder="Enter your salary...">
-        <small id="helpId" class="form-text text-muted">Your information is secured with 256-bit encryption.</small>
+        <input type="number" class="form-control" id="" aria-describedby="salary" v-model="salary" placeholder="Enter your salary...">
+        <small id="helpId" class="form-text text-muted">Your information is rendered client-side and is not stored on our servers.</small>
       </div>
     <br/>
 
     <div class="row gx-4">
       <div class="col">
         <label id="formDescriptions">Gross Income</label>
-        <label v-if='salary' class="form-control bg-light">{{ salary }}</label>
+        <label v-if='salary' class="form-control bg-light">${{ salary }}</label>
         <label v-else class="form-control bg-light">$0</label>
       </div>
       <div class="col">
@@ -78,9 +78,9 @@
     <div class="form-group">
       <label id="formHeadings">Salary Sacrifice Calculator</label>
         <br/>
-        <input type="text" class="form-control" id="" aria-describedby="purchasePrice" v-model="purchasePrice" v-if=salary placeholder="Enter item purchase price...">
-        <input type="text" class="form-control" id="" aria-describedby="purchasePrice" v-model="purchasePrice" v-else placeholder="Please enter your salary first" disabled>
-        <small id="helpId" class="form-text text-muted">Can you afford this?</small>
+        <input type="number" class="form-control" id="" aria-describedby="purchasePrice" v-model="purchasePrice" v-if=salary placeholder="Enter item purchase price...">
+        <input type="number" class="form-control" id="" aria-describedby="purchasePrice" v-model="purchasePrice" v-else placeholder="Please enter your salary first" disabled>
+        <small id="helpId" class="form-text text-muted" v-if="purchasePrice">Can you afford this?</small>
       </div>
     <br/>
     
@@ -88,14 +88,9 @@
       <div class="col">
         <label id="formDescriptions">Pre-Tax Purchase Price</label>
         <label v-if="!purchasePrice" class="form-control bg-light">$0</label>
+        <label v-else-if="purchasePrice > (calculateGross(salary)/6)" class="form-control bg-light">Price exceeds 2 months of income, this is not recommended... (but it's ${{ (calculateGross(salary)) - (calculateGross(salary - purchasePrice)) }})</label>
         <label v-else class="form-control bg-light">${{ (calculateGross(salary)) - (calculateGross(salary - purchasePrice)) }}</label>
       </div>
-      <!-- 
-      <div class="col">
-        <label id="formDescriptions"></label>
-        <label class="form-control bg-light">{{ weeklySalary }}</label>
-      </div>
-      -->
     </div>
 
     <br/>
@@ -106,7 +101,6 @@
 </template>
 
 <style scoped>
-
 .form-control {
   height: 50px;
   text-align: center;
