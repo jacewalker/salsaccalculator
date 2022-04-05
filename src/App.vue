@@ -2,9 +2,11 @@
 // This starter template is using Vue 3 <script setup> SFCs
 // Check out https://v3.vuejs.org/api/sfc-script-setup.html#sfc-script-setup
 import Calculator from './components/Calculator.vue'
+import Navbar from './components/Navbar.vue'
 </script>
 
 <template>
+    <Navbar/>
     <Calculator/>
 </template>
 
@@ -14,7 +16,7 @@ import Calculator from './components/Calculator.vue'
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
-  margin-top: 60px;
+  
 }
 
 * {

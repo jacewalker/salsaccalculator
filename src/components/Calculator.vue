@@ -101,9 +101,16 @@
 </template>
 
 <style scoped>
+
+.container {
+  margin-top: 60px;
+}
 .form-control {
   height: 50px;
   text-align: center;
+  margin: 0 auto;
+  width: 500px;
+  align-content: center;
 }
 
 #formDescriptions {
@@ -114,5 +121,6 @@
   color: white;
   font-size: x-large;
 }
+
 
 </style>
