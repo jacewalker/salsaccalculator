@@ -1,3 +1,6 @@
+## docker build -t salsaccalc .
+## docker run -p :8080 -d salsaccalc
+
 FROM node:lts-alpine
 
 # install simple http server for serving static content
